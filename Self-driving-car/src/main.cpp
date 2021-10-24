@@ -1,4 +1,4 @@
-// AUTHOR: Juan García Santos
+// AUTHOR: Juan Garcia Santos
 // DATE: 04/10/2021
 // EMAIL: alu0101325583@ull.edu.es
 // VERSION: 4.0
@@ -10,13 +10,15 @@
 // chcp.com 65001 arregla el encoding
 
 #include "include/world.h"
+#include <chrono>
 
 int main( void ) {
     int row, col, vehicle_row, vehicle_col, menu, vehicle_type;
-    int destination_row, destination_col, obstacle_percentage, obstacle_type = -1, heuristic_type = -1;
-    long t0,t1;
+    int destination_row, destination_col, obstacle_percentage = 0, obstacle_type = -1, heuristic_type = -1;
+    bool direction = true; //false = 4 true = 8
+    using Time = std::chrono::high_resolution_clock;
 
-    std::cout << "¿Desea el comportamiento personalizado(0), o evaluación expermiental (1)?\n";
+    std::cout << "¿Desea el comportamiento personalizado(0), o evaluacion expermiental (1)?\n";
     std::cout << "Introduzca 0 o 1: ";
     std::cin >> menu;
     while ((menu != 0) && (menu != 1)) {
@@ -48,6 +50,16 @@ int main( void ) {
     while ((obstacle_type != 0) && (obstacle_type != 1) && (obstacle_type != 2)) {
         std::cout << "¡Eso no era un 1 o un 0! Ojito cuidado. " << std::endl << "Introduzca 0, 1 o 2: ";
         std::cin >> obstacle_type;
+    }
+
+    if(obstacle_type == 0 || obstacle_type == 1) {
+        std::cout << "Introduzca el porcentaje de obstaculos (entre 0 y 100): " << std:: endl;
+        std::cin >> obstacle_percentage;
+        while ((obstacle_percentage < 0) || (obstacle_percentage > 100)) {
+            std::cout << "Eso no estaba entre 0 y 100. Ojito Cuidado" << std::endl;
+            std::cout << "Introduzca el numero de obstaculos (entre 0 y 100): " << std:: endl;
+            std::cin >> obstacle_percentage;
+        }
     }
 
     world.Obstacle(obstacle_percentage, obstacle_type);
@@ -91,44 +103,122 @@ int main( void ) {
 
     world.SetVehicle(vehicle_row, vehicle_col, destination_row, destination_col);
 
-    std::cout << "¿Desea emplear una función heurística Manhattan (0), Euclídea (1) o  tchebysev(2)?\n";
-    std::cout << "Introduzca 0, 1 o 2: ";
-    std::cin >> heuristic_type;
-    while ((heuristic_type != 0) && (heuristic_type != 1) && (heuristic_type != 2)) {
-        std::cout << "¡Eso no era un 1 o un 0! Ojito cuidado. " << std::endl << "Introduzca 0, 1 o 2: ";
+    if(menu == 0){
+
+        std::cout << "¿Coche de 8 o 4 direcciones?: ";
+        std::cin >> vehicle_type;
+        while ((vehicle_type != 8) && (vehicle_type != 4)) {
+            std::cout << "Elige entre 8 y 4:" << std::endl;
+            std::cin >> vehicle_type;
+        }
+        if (vehicle_type == 4) direction = false; // se establece si el coche emplea 4 u 8 direcciones
+
+        std::cout << "¿Desea emplear una funcion heuristica Manhattan (0), Euclidea (1) o  tchebysev(2)?\n";
+        std::cout << "Introduzca 0, 1 o 2: ";
         std::cin >> heuristic_type;
+        while ((heuristic_type != 0) && (heuristic_type != 1) && (heuristic_type != 2)) {
+            std::cout << "¡Eso no era un 1 o un 0! Ojito cuidado. " << std::endl << "Introduzca 0, 1 o 2: ";
+            std::cin >> heuristic_type;
+        }
+        f_heuristica* h;
+
+        if(heuristic_type == 0) 
+            h = new d_manhattan;
+        else if (heuristic_type == 1) 
+            h = new d_euclidea;
+        else
+            h = new d_tchebysev;
+
+        std::cout << "\nMundo inicial: \n";
+        world.PrintWorld(); //Mundo inicial
+
+        auto start_time = Time::now(); //inicia el crono
+        if(world.Astar(h , direction))std::cout<<"\nSolucion\n"<<std::endl; //true hace 8 false 4 direcciones
+        auto elapsed = Time::now() - start_time;
+        long long end_time = std::chrono::duration_cast<std::chrono::nanoseconds>(elapsed).count(); // acaba el chrono
+
+        world.PrintWorld();
+        std::cout<<"Tiempo de ejecucion en nanosegundos = "<< end_time << std::endl;        
     }
 
-/*     switch(heuristic_type) {
-        case 0:
-            f_heuristica* h = new d_manhattan;
-        break;
-        case 1:
-            f_heuristica* h = new d_euclidea;
-        break;
-        case 2:
-            f_heuristica* h = new d_tchebysev;
-        break;
-    } */
+    else if( menu == 1) {
+        std::cout << "\nMundo inicial: \n";
+        world.PrintWorld(); //Mundo inicial
+        // algoritmo usando 4 direcciones
+        std::string minimo;
+        
+        f_heuristica* h1 = new d_manhattan;
+            std::cout << "\nMundo resuelto con heuristica Manhattan y 4 direcciones: \n";
+
+            auto start_time_manhattan_4 = Time::now(); //inicia el crono
+            if(world.Astar(h1 , false))std::cout << "Solucion" << std::endl; //true hace 8 false 4 direcciones
+            auto elapsed_manhattan_4 = Time::now()- start_time_manhattan_4;
+            long long end_time_manhattan_4 = std::chrono::duration_cast<std::chrono::nanoseconds>(elapsed_manhattan_4).count(); // acaba el chrono
+
+            world.PrintWorld();
+            std::cout<<"Tiempo de ejecucion en ms = "<< end_time_manhattan_4 << std::endl;  
+            
+
+        f_heuristica* h2 = new d_euclidea;
+            std::cout << "\nMundo resuelto con heuristica Euclidea y 4 direcciones: \n";
+
+            auto start_time_euclidea_4 = Time::now(); //inicia el crono
+            if(world.Astar(h2, false)) std::cout << "Solucion" << std::endl;
+            auto elapsed_euclidea_4 = Time::now()- start_time_euclidea_4;
+            long long end_time_euclidea_4 = std::chrono::duration_cast<std::chrono::nanoseconds>(elapsed_euclidea_4).count(); // acaba el chrono
+
+            world.PrintWorld();
+            std::cout<<"Tiempo de ejecucion en ms = "<< end_time_euclidea_4 << std::endl;
+
+        f_heuristica* h3 = new d_tchebysev;
+            std::cout << "\nMundo resuelto con heuristica Tchebysev y 4 direcciones: \n";
+
+            auto start_time_tchebysev_4 = Time::now(); //inicia el crono
+            if(world.Astar(h3, false)) std::cout << "Solucion" << std::endl;
+            auto elapsed_tchebysev_4 = Time::now()- start_time_tchebysev_4;
+            long long end_time_tchebysev_4 = std::chrono::duration_cast<std::chrono::nanoseconds>(elapsed_tchebysev_4).count(); // acaba el chrono
+
+            world.PrintWorld();
+            std::cout<<"Tiempo de ejecucion en ms = "<< end_time_tchebysev_4 << std::endl;
     
-    world.PrintWorld(); //Mundo inicial
 
-    f_heuristica* h1 = new d_euclidea;
-    t0 = clock();
-    if(world.Astar(h1, true))std::cout<<"Solucion"<<std::endl; //true hace 8 false 4 direcciones
-    t1 = clock();
-    double time = (double(t1-t0)/CLOCKS_PER_SEC);
-    std::cout<<"Tiempo de ejecución = "<< time <<std::endl;
-    world.PrintWorld();
+            //algoritmo usando 8 direcciones
 
-    f_heuristica* h2 = new d_manhattan;
-    if(world.Astar(h2, false)) std::cout<<"Solucion"<<std::endl;
-    world.PrintWorld();
+            f_heuristica* h4 = new d_manhattan;
+            std::cout << "\nMundo resuelto con heuristica Manhattan y 8 direcciones: \n";
 
+            auto start_time_manhattan_8 = Time::now(); //inicia el crono
+            if(world.Astar(h4 , true))std::cout << "Solucion" << std::endl; //true hace 8 false 4 direcciones
+            auto elapsed_manhattan_8 = Time::now()- start_time_manhattan_8;
+            long long end_time_manhattan_8 = std::chrono::duration_cast<std::chrono::nanoseconds>(elapsed_manhattan_8).count(); // acaba el chrono
 
-    f_heuristica* h3 = new d_tchebysev;
-    if(world.Astar(h3, false)) std::cout<<"Solucion"<<std::endl;
-    world.PrintWorld();
+            world.PrintWorld();
+            std::cout<<"Tiempo de ejecucion en ms = "<< end_time_manhattan_8 << std::endl;  
+            
+
+        f_heuristica* h5 = new d_euclidea;
+            std::cout << "\nMundo resuelto con heuristica Euclidea y 8 direcciones: \n";
+
+            auto start_time_euclidea_8 = Time::now(); //inicia el crono
+            if(world.Astar(h5, true)) std::cout << "Solucion" << std::endl;
+
+            auto elapsed_euclidea_8 = Time::now()- start_time_euclidea_8;
+            long long end_time_euclidea_8 = std::chrono::duration_cast<std::chrono::nanoseconds>(elapsed_euclidea_8).count(); // acaba el chrono
+
+            world.PrintWorld();
+            std::cout<<"Tiempo de ejecucion en ms = "<< end_time_euclidea_8 << std::endl;
+
+        f_heuristica* h6 = new d_tchebysev;
+            std::cout << "\nMundo resuelto con heuristica Tchebysev y 8 direcciones: \n";
+
+            auto start_time_tchebysev_8 = Time::now(); //inicia el crono
+            if(world.Astar(h6, true)) std::cout << "Solucion" << std::endl;
+            auto elapsed_tchebysev_8 = Time::now()- start_time_tchebysev_8;
+            long long end_time_tchebysev_8 = std::chrono::duration_cast<std::chrono::nanoseconds>(elapsed_tchebysev_8).count(); // acaba el chrono
+
+            world.PrintWorld();
+            std::cout<<"Tiempo de ejecucion en ms = "<< end_time_tchebysev_8 << std::endl;
+    }
 
 return 0;
 }

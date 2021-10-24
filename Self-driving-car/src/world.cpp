@@ -40,9 +40,9 @@ World::Obstacle(int obstacle_percentage, int obstacle_type){
 
         srand(time(NULL)); 
         for(int i = 0; i < obstacle_quantity; i++) {
-            int random = rand()%(col * row);
-
-            SetWorldState(1, random / col, random % col);
+            int random_row = rand()%(world.size() - 0) + 0;
+            int random_col = rand()%(world[random_row].size());
+            SetWorldState(1, random_row, random_col);
         }
         break;
     
