@@ -1,7 +1,7 @@
-// AUTHOR: Juan Garcia Santos
-// DATE: 04/10/2021
-// EMAIL: alu0101325583@ull.edu.es
-// VERSION: 4.0
+// AUTHOR: Joseph Gabino Rodríguez
+// DATE: 24/10/2021
+// EMAIL: alu0101329161@ull.edu.es
+// VERSION: 1.0
 // SUBJECT: AI
 // PRACTICE Nº: 1
 // Compilation: make
