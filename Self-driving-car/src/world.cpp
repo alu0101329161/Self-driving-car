@@ -106,6 +106,7 @@ World::Obstacle(int obstacle_percentage, int obstacle_type){
 
             if((x < 0) || (x >= row) || (y < 0) || ( y >= col)) throw 1;
 
+
             SetWorldState( 1 , x, y);
             }
         }          
@@ -116,11 +117,13 @@ World::Obstacle(int obstacle_percentage, int obstacle_type){
         switch (error)
         {
         case 0:
-            std::cout<<"No se pudo abrir el archivo - obstacle.txt"<<std::endl;
+            std::cerr<<"No se pudo abrir el archivo - obstacle.txt"<<std::endl;
+            exit(0);
             break;
         
         case 1:
-            std::cout<<"Datos mal introducidos"<<std::endl;
+            std::cerr<<"Fichero tiene coordenadas mal"<<std::endl;
+            exit(0);
             break;
         }
     }
@@ -162,7 +165,7 @@ void World::PrintWorld(void) {
             switch(world[i][j].GetState()) {
 
                 case 0:
-                    std::cout<<termcolor::on_white<<" "<<termcolor::reset;
+                    std::cout<<termcolor::on_white<<"J"<<termcolor::reset;
                 break;
                 case 1:
                     std::cout<<termcolor::on_color<0, 0, 0><<" "<<termcolor::reset;

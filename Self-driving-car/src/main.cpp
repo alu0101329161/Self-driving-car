@@ -94,7 +94,7 @@ int main( void ) {
         std::cin >> destination_col;
         while ((destination_col < 0) || (destination_col >=  col)) {
             std::cout << "Esa coordenada Y no está dentro del mundo previamente definido. Ojito Cuidado" << std::endl;
-            std::cout << "Introduzca una coordenada entre " << 0 << " y " << col-1 << std:: endl;
+            std::cout << "Introduzca una coordenada entre " << 0 << " y " << col << std:: endl;
             std::cin >> destination_col;
         }
         
@@ -133,7 +133,9 @@ int main( void ) {
         world.PrintWorld(); //Mundo inicial
 
         auto start_time = Time::now(); //inicia el crono
-        if(world.Astar(h , direction))std::cout<<"\nSolucion\n"<<std::endl; //true hace 8 false 4 direcciones
+        if(world.Astar(h , direction))std::cout<<"\n!!Solucion Encontrada||\n"<<std::endl; //true hace 8 false 4 direcciones
+        else std::cout << "!!Solucion No Encontrada||" << std::endl;
+        
         auto elapsed = Time::now() - start_time;
         long long end_time = std::chrono::duration_cast<std::chrono::nanoseconds>(elapsed).count(); // acaba el chrono
 
@@ -151,7 +153,9 @@ int main( void ) {
             std::cout << "\nMundo resuelto con heuristica Manhattan y 4 direcciones: \n";
 
             auto start_time_manhattan_4 = Time::now(); //inicia el crono
-            if(world.Astar(h1 , false))std::cout << "Solucion" << std::endl; //true hace 8 false 4 direcciones
+            if(world.Astar(h1 , false))std::cout << "!!Solucion Encontrada||" << std::endl; //true hace 8 false 4 direcciones
+            else std::cout << "!!Solucion No Encontrada||" << std::endl;
+
             auto elapsed_manhattan_4 = Time::now()- start_time_manhattan_4;
             long long end_time_manhattan_4 = std::chrono::duration_cast<std::chrono::nanoseconds>(elapsed_manhattan_4).count(); // acaba el chrono
 
@@ -163,7 +167,9 @@ int main( void ) {
             std::cout << "\nMundo resuelto con heuristica Euclidea y 4 direcciones: \n";
 
             auto start_time_euclidea_4 = Time::now(); //inicia el crono
-            if(world.Astar(h2, false)) std::cout << "Solucion" << std::endl;
+            if(world.Astar(h2, false)) std::cout << "!!Solucion Encontrada||" << std::endl;
+            else std::cout << "!!Solucion No Encontrada||" << std::endl;
+
             auto elapsed_euclidea_4 = Time::now()- start_time_euclidea_4;
             long long end_time_euclidea_4 = std::chrono::duration_cast<std::chrono::nanoseconds>(elapsed_euclidea_4).count(); // acaba el chrono
 
@@ -174,7 +180,9 @@ int main( void ) {
             std::cout << "\nMundo resuelto con heuristica Tchebysev y 4 direcciones: \n";
 
             auto start_time_tchebysev_4 = Time::now(); //inicia el crono
-            if(world.Astar(h3, false)) std::cout << "Solucion" << std::endl;
+            if(world.Astar(h3, false)) std::cout << "!!Solucion Encontrada||" << std::endl;
+            else std::cout << "!!Solucion No Encontrada||" << std::endl;
+
             auto elapsed_tchebysev_4 = Time::now()- start_time_tchebysev_4;
             long long end_time_tchebysev_4 = std::chrono::duration_cast<std::chrono::nanoseconds>(elapsed_tchebysev_4).count(); // acaba el chrono
 
@@ -188,7 +196,9 @@ int main( void ) {
             std::cout << "\nMundo resuelto con heuristica Manhattan y 8 direcciones: \n";
 
             auto start_time_manhattan_8 = Time::now(); //inicia el crono
-            if(world.Astar(h4 , true))std::cout << "Solucion" << std::endl; //true hace 8 false 4 direcciones
+            if(world.Astar(h4 , true))std::cout << "!!Solucion Encontrada||" << std::endl; //true hace 8 false 4 direcciones
+            else std::cout << "!!Solucion No Encontrada||" << std::endl;
+
             auto elapsed_manhattan_8 = Time::now()- start_time_manhattan_8;
             long long end_time_manhattan_8 = std::chrono::duration_cast<std::chrono::nanoseconds>(elapsed_manhattan_8).count(); // acaba el chrono
 
@@ -200,7 +210,8 @@ int main( void ) {
             std::cout << "\nMundo resuelto con heuristica Euclidea y 8 direcciones: \n";
 
             auto start_time_euclidea_8 = Time::now(); //inicia el crono
-            if(world.Astar(h5, true)) std::cout << "Solucion" << std::endl;
+            if(world.Astar(h5, true)) std::cout << "!!Solucion Encontrada||" << std::endl;
+            else std::cout << "!!Solucion No Encontrada||" << std::endl;
 
             auto elapsed_euclidea_8 = Time::now()- start_time_euclidea_8;
             long long end_time_euclidea_8 = std::chrono::duration_cast<std::chrono::nanoseconds>(elapsed_euclidea_8).count(); // acaba el chrono
@@ -212,7 +223,9 @@ int main( void ) {
             std::cout << "\nMundo resuelto con heuristica Tchebysev y 8 direcciones: \n";
 
             auto start_time_tchebysev_8 = Time::now(); //inicia el crono
-            if(world.Astar(h6, true)) std::cout << "Solucion" << std::endl;
+            if(world.Astar(h6, true)) std::cout << "!!Solucion Encontrada||" << std::endl;
+            else std::cout << "!!Solucion No Encontrada||" << std::endl;
+
             auto elapsed_tchebysev_8 = Time::now()- start_time_tchebysev_8;
             long long end_time_tchebysev_8 = std::chrono::duration_cast<std::chrono::nanoseconds>(elapsed_tchebysev_8).count(); // acaba el chrono
 
