@@ -31,6 +31,7 @@ void EvaluacionExperimental(World& world) {
 
             world.PrintWorld();
             std::cout<<"Tiempo de ejecucion en ms = "<< end_time_manhattan_4 << std::endl;  
+            std::cout<<"Tamano del camino minimo: "<< world.GetContador() << std::endl;  
             
 
         f_heuristica* h2 = new d_euclidea;
@@ -45,7 +46,7 @@ void EvaluacionExperimental(World& world) {
 
             world.PrintWorld();
             std::cout<<"Tiempo de ejecucion en ms = "<< end_time_euclidea_4 << std::endl;
-
+            std::cout<<"Tamano del camino minimo: "<< world.GetContador() << std::endl;  
         
         f_heuristica* h3 = new d_tchebysev;
             std::cout << "\nMundo resuelto con heuristica Tchebysev y 4 direcciones: \n";
@@ -59,7 +60,7 @@ void EvaluacionExperimental(World& world) {
 
             world.PrintWorld();
             std::cout<<"Tiempo de ejecucion en ms = "<< end_time_tchebysev_4 << std::endl;
-        
+            std::cout<<"Tamano del camino minimo: "<< world.GetContador() << std::endl;  
 
             //algoritmo usando 8 direcciones
 
@@ -75,7 +76,7 @@ void EvaluacionExperimental(World& world) {
 
             world.PrintWorld();
             std::cout<<"Tiempo de ejecucion en ms = "<< end_time_manhattan_8 << std::endl;  
-            
+            std::cout<<"Tamano del camino minimo: "<< world.GetContador() << std::endl;  
 
         f_heuristica* h5 = new d_euclidea;
             std::cout << "\nMundo resuelto con heuristica Euclidea y 8 direcciones: \n";
@@ -89,7 +90,7 @@ void EvaluacionExperimental(World& world) {
 
             world.PrintWorld();
             std::cout<<"Tiempo de ejecucion en ms = "<< end_time_euclidea_8 << std::endl;
-
+            std::cout<<"Tamano del camino minimo: "<< world.GetContador() << std::endl;  
         
         f_heuristica* h6 = new d_tchebysev;
             std::cout << "\nMundo resuelto con heuristica Tchebysev y 8 direcciones: \n";
@@ -103,13 +104,13 @@ void EvaluacionExperimental(World& world) {
 
             world.PrintWorld();
             std::cout<<"Tiempo de ejecucion en ms = "<< end_time_tchebysev_8 << std::endl;
-        
+            std::cout<<"Tamano del camino minimo: "<< world.GetContador() << std::endl;          
 }
 
 
 int main( void ) {
     //int contador_4_manhattan, contador_4_euclidea, contador_8_manhattan, contador_8_euclidea;
-    int row = 100, col = 100, vehicle_row = 0, vehicle_col = 0, menu, vehicle_type;
+    int row = 10, col = 10, vehicle_row = 0, vehicle_col = 0, menu, vehicle_type;
     int destination_row = row - 1, destination_col = col - 1, obstacle_percentage = 30, obstacle_type = 0, heuristic_type = -1;
     bool direction = true; //false = 4 true = 8
     using Time = std::chrono::high_resolution_clock;
@@ -238,7 +239,8 @@ int main( void ) {
         long long end_time = std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count(); // acaba el chrono
 
         world.PrintWorld();
-        std::cout<<"Tiempo de ejecucion en microsegundos = "<< end_time << std::endl;        
+        std::cout<<"Tiempo de ejecucion en microsegundos = "<< end_time << std::endl;       
+        std::cout<<"Tamano del camino minimo: "<< world.GetContador() << std::endl;   
     }
 
     else if( menu == 1) {

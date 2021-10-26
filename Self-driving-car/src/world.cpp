@@ -196,17 +196,20 @@ World::PrintWorld(void) {
 // Permite guardar el camino para llegar al destino
 void 
 World::RebuildPath() {
-
+    SetContador(0);
     int i = world[end_.first][end_.second].GetDad().first;
     int j = world[end_.first][end_.second].GetDad().second;
     int aux_i, aux_j;
+    int contador = 0;
 
     while(world[i][j].GetDad().first != -1 && world[i][j].GetDad().second != -1) {
         world[i][j].SetState(2);
         aux_i = world[i][j].GetDad().first;
         aux_j = world[i][j].GetDad().second;
         i = aux_i; j = aux_j;
+        contador += 1;
     }
+    SetContador(contador + 1);
 }
 
 // Creación de hijos tanto en 4 como 8 direcciones
