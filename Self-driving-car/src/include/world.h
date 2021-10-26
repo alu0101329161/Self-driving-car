@@ -16,6 +16,7 @@
 #include <fstream>
 #include <iostream>
 #include <random>
+#include <time.h>
 
 
 // O libre, 1 obstaculos, 2 camino, 3 start, 4 end
@@ -30,6 +31,7 @@ private:
     std::vector<std::vector<Cell>> world; // Vector donde se almacena el mundo
     std::pair<int, int> star_; // Posicion de inicio
     std::pair<int, int> end_; // Posicion de fin
+    int contador = 0;
 
 public:
 
@@ -53,5 +55,13 @@ public:
     int GetColumn() {
         return col;
     } 
+
+    int GetContador() {
+        return contador;
+    }
+
+    void SetContador(int counter) {
+        contador = counter;
+    }
 
 };
