@@ -15,18 +15,18 @@ class Cell {
     
     private:
 
-    int state;
-    bool open = false, close = false;
+    int state;  // Permite diferenciar de obtáculos
+    bool open = false, close = false; // Saber si esta en lista abierta o cerrada
 
-    int x; //coordenada x
-    int y; //cordenada y
+    int x; // Coordenada x
+    int y; // Cordenada y
 
     double f_; // Coste estimado desde nodo inicial a nodo objetivo (g(n) + h(n))
     double h_; // Coste estimado desde este nodo al nodo objetivo
     double g_; // Coste desde el nodo inicial a este nodo
 
-    std::pair<int, int> dad_{-1, -1};
-    std::vector<std::pair<int,int>> sons_;
+    std::pair<int, int> dad_{-1, -1}; // Par que almacena al padre
+    std::vector<std::pair<int,int>> sons_; // Vcetor de pares para los hijos
 
     public:
 

@@ -10,8 +10,8 @@
 
 #include "include/world.h"
 
-//Constructores
 
+//Constructor que crea la malla
 World::World(int row_, int col_) {
 
     row = row_, col = col_;
@@ -27,6 +27,8 @@ World::World(int row_, int col_) {
         }
 }
 
+
+// Método que añade los obstáculos al mundo
 void
 World::Obstacle(int obstacle_percentage, int obstacle_type){
 
@@ -132,6 +134,7 @@ World::Obstacle(int obstacle_percentage, int obstacle_type){
     }   
 }
 
+// Establece posición de origen y destino
 void 
 World::SetVehicle(int x1, int y1, int x2, int y2) {
     star_ = std::make_pair(x1, y1);
@@ -141,24 +144,28 @@ World::SetVehicle(int x1, int y1, int x2, int y2) {
 }
 
 
-//Getters y Setters
-
-int World::GetWorldState(int i, int j) {
+// Getter del mundo
+int 
+World::GetWorldState(int i, int j) {
     return world[i][j].GetState();
 }
 
-void World::SetWorldState(int state_, int i, int j) {
+
+// Setter del mundo
+void 
+World::SetWorldState(int state_, int i, int j) {
     world[i][j].SetState(state_);
 }
 
 
-void World::PrintWorld(void) {
+// Imprime el mundo por la terminal y limpia estructuras
+void 
+World::PrintWorld(void) {
 
     for(int i = 0; i < row; i++) {
         for(int j = 0; j < col; j++) {
 
             world[i][j].CleanSons();
-            
             world[i][j].SetOpen(false);
             world[i][j].SetClose(false);
 
@@ -186,8 +193,9 @@ void World::PrintWorld(void) {
     }
 }
 
+// Permite guardar el camino para llegar al destino
 void 
-World::ReconstruirCamino() {
+World::RebuildPath() {
 
     int i = world[end_.first][end_.second].GetDad().first;
     int j = world[end_.first][end_.second].GetDad().second;
@@ -201,27 +209,28 @@ World::ReconstruirCamino() {
     }
 }
 
-
+// Creación de hijos tanto en 4 como 8 direcciones
 void
 World::CreateSons(int x, int y, bool direction) {
+    //world[x][y].CleanSons();
 
-    if(x - 1 >= 0 && world[x-1][y].GetState() != 1)
-        world[x][y].SetSons(x-1, y);
-    if(x + 1 < row && world[x+1][y].GetState() != 1)
-        world[x][y].SetSons(x+1, y);
-    if(y - 1 >= 0 && world[x][y-1].GetState() != 1)
-        world[x][y].SetSons(x, y-1);
+    if(x - 1 >= 0 && world[x - 1][y].GetState() != 1)
+        world[x][y].SetSons(x - 1, y);
+    if(x + 1 < row && world[x + 1][y].GetState() != 1)
+        world[x][y].SetSons(x + 1, y);
+    if(y - 1 >= 0 && world[x][y - 1].GetState() != 1)
+        world[x][y].SetSons(x, y - 1);
     if(y + 1 < col && world[x][y + 1].GetState() != 1)
         world[x][y].SetSons(x, y + 1);
 
     if(direction) {
         
         if(x - 1 >= 0 && y - 1 >= 0 && world[x - 1][y - 1].GetState() != 1)
-            world[x][y].SetSons(x-1, y -1);
+            world[x][y].SetSons(x - 1, y -1);
         if(x - 1 >= 0 && y + 1 < col && world[x - 1][y + 1].GetState() != 1)
             world[x][y].SetSons(x - 1, y + 1);
         if(x + 1 < row && y - 1 >= 0 && world[x + 1][y - 1].GetState() != 1)
-            world[x][y].SetSons(x+1, y -1);
+            world[x][y].SetSons(x + 1, y - 1);
         if(x + 1 < row && y + 1 < col && world[x + 1][y + 1].GetState() != 1)
             world[x][y].SetSons(x + 1, y + 1);
     }
@@ -232,48 +241,48 @@ World::CreateSons(int x, int y, bool direction) {
 bool
 World::Astar(f_heuristica* heuristica, bool direction){
 
-    std::list<std::pair<int, int>> open, close;
+    std::list<std::pair<int, int>> open, close; // Lista donde almacenamos los hijos
     
     world[star_.first][star_.second].SetG(0);
     world[star_.first][star_.second].SetF((*heuristica)(world[star_.first][star_.second], world[end_.first][end_.second]));
 
-    std::pair<int, int> current {star_.first, star_.second};
+    std::pair<int, int> current {star_.first, star_.second}; // Guardamos la posicion del nodo actual
     open.push_front(current);
     world[star_.first][star_.second].SetOpen(true);
 
 
-    while(!open.empty()) {
+    while(!open.empty()) { //Mientras lista este llena
 
-        std::list<std::pair<int, int>>::iterator min = open.begin(), it;
+        std::list<std::pair<int, int>>::iterator min = open.begin(), it; // Recorremos la lista  buscando el nodo con menor F
         for (it = min; it != open.end(); it++)
             if (world[(*it).first][(*it).second].GetF() < world[(*min).first][(*min).second].GetF())
                 min = it;
 
         current = (*min);
 
-        if((world[(*min).first][(*min).second].GetX() == end_.first) && (end_.second == world[(*min).first][(*min).second].GetY())) {
-            ReconstruirCamino();
+        if((world[(*min).first][(*min).second].GetX() == end_.first) && (end_.second == world[(*min).first][(*min).second].GetY())) { //Hemos llegado al destino
+            RebuildPath();
             return true;
         }
 
-        world[(*min).first][(*min).second].SetClose(true);
-        world[(*min).second][(*min).first].SetOpen(false);
+        world[(*min).first][(*min).second].SetClose(true); // El elemento sera guardado en lista cerrada
+        world[(*min).first][(*min).second].SetOpen(false);
         open.erase(min);
         close.push_front(current);
 
-        CreateSons(current.first, current.second, direction);
+        CreateSons(current.first, current.second, direction); // Creo a los hijos
 
-        for(int i = 0; i < world[current.first][current.second].GetSonsSize(); i++) {
+        for(int i = 0; i < world[current.first][current.second].GetSonsSize(); i++) { // Para cada hijo ...
             int son_x = world[current.first][current.second].GetSons(i).first, son_y = world[current.first][current.second].GetSons(i).second;
             
-            if(world[son_x][son_y].GetOpen())  //el elemnto que quiero añadir ya esta en lista?
+            if(world[son_x][son_y].GetOpen())  // El elemnto que quiero añadir ya esta en lista abierta?
                 if(world[son_x][son_y].GetG() > world[current.first][current.second].GetG() + 1) {
                             world[son_x][son_y].SetG(world[current.first][current.second].GetG() + 1);
                             world[son_x][son_y].SetF((*heuristica)(world[son_x][son_y], world[end_.first][end_.second]) + world[current.first][current.second].GetG() + 1);
                             world[son_x][son_y].SetDad(current.first, current.second);
                 }
 
-            if(world[son_x][son_y].GetClose())
+            if(world[son_x][son_y].GetClose()) // El elemnto que quiero añadir ya esta en lista cerrada?
                 if(world[son_x][son_y].GetG() > world[current.first][current.second].GetG()+1)
                     for (std::list<std::pair<int, int>>::iterator aux_it = close.begin(); aux_it != close.end(); aux_it++)
                         if(world[current.first][current.second].GetSons(i).first == current.first && world[current.first][current.second].GetSons(i).second == current.second) {
@@ -288,7 +297,7 @@ World::Astar(f_heuristica* heuristica, bool direction){
                             break;
                         }
 
-            if(!world[son_x][son_y].GetClose() && !world[son_x][son_y].GetOpen()) {
+            if(!world[son_x][son_y].GetClose() && !world[son_x][son_y].GetOpen()) { // El elemtento no esta en ninguna lista
                 world[son_x][son_y].SetOpen(true);
                 world[son_x][son_y].SetG(world[current.first][current.second].GetG()+1);
                 world[son_x][son_y].SetF((*heuristica)(world[son_x][son_y], world[end_.first][end_.second]) + world[current.first][current.second].GetG()+1);

@@ -86,7 +86,7 @@ int main( void ) {
         std::cin >> destination_row;
         while ((destination_row < 0) || (destination_row >= row)) {
             std::cout << "Esa coordenada X no está dentro del mundo previamente definido. Ojito Cuidado" << std::endl;
-            std::cout << "Introduzca una coordenada entre " << 0 << " y " << row << std:: endl;
+            std::cout << "Introduzca una coordenada entre " << 0 << " y " << row-1 << std:: endl;
         std::cin >> destination_row;
         }
 
@@ -94,7 +94,7 @@ int main( void ) {
         std::cin >> destination_col;
         while ((destination_col < 0) || (destination_col >=  col)) {
             std::cout << "Esa coordenada Y no está dentro del mundo previamente definido. Ojito Cuidado" << std::endl;
-            std::cout << "Introduzca una coordenada entre " << 0 << " y " << col << std:: endl;
+            std::cout << "Introduzca una coordenada entre " << 0 << " y " << col-1 << std:: endl;
             std::cin >> destination_col;
         }
         
