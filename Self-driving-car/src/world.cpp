@@ -187,6 +187,10 @@ World::PrintWorld(void) {
                 case 4:
                     std::cout<<termcolor::on_blue<<">"<<termcolor::reset;
                 break;
+                case 5:
+                    std::cout<<termcolor::on_bright_red<<" "<<termcolor::reset;
+                    world[i][j].SetState(0);
+                break;
             }
         }
         std::cout<<std::endl;
@@ -274,6 +278,7 @@ World::Astar(f_heuristica* heuristica, bool direction){
         world[(*min).first][(*min).second].SetClose(true); // El elemento sera guardado en lista cerrada
         world[(*min).first][(*min).second].SetOpen(false);
         open.erase(min);
+        world[(*min).first][(*min).second].SetState(5);
         contador +=1;
         close.push_front(current);
 
