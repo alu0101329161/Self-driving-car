@@ -31,8 +31,9 @@ void EvaluacionExperimental(World& world) {
 
             world.PrintWorld();
             std::cout<<"Tiempo de ejecucion en microsegundos = "<< end_time_manhattan_4 << std::endl;  
-            std::cout<<"Tamano del camino minimo: "<< world.GetContador() << std::endl;  
-            
+            std::cout<<"Tamano del camino minimo: "<< world.GetContadorCamino() << std::endl;
+            std::cout<<"Nodos analizados: "<< world.GetContadorNodos() << std::endl;  
+            getchar();
 
         f_heuristica* h2 = new d_euclidea;
             std::cout << "\nMundo resuelto con heuristica Euclidea y 4 direcciones: \n";
@@ -46,7 +47,9 @@ void EvaluacionExperimental(World& world) {
 
             world.PrintWorld();
             std::cout<<"Tiempo de ejecucion en microsegundos = "<< end_time_euclidea_4 << std::endl;
-            std::cout<<"Tamano del camino minimo: "<< world.GetContador() << std::endl;  
+            std::cout<<"Tamano del camino minimo: "<< world.GetContadorCamino() << std::endl;
+            std::cout<<"Nodos analizados: "<< world.GetContadorNodos() << std::endl;  
+            getchar();
         
         f_heuristica* h3 = new d_tchebysev;
             std::cout << "\nMundo resuelto con heuristica Tchebysev y 4 direcciones: \n";
@@ -60,7 +63,9 @@ void EvaluacionExperimental(World& world) {
 
             world.PrintWorld();
             std::cout<<"Tiempo de ejecucion en microsegundos = "<< end_time_tchebysev_4 << std::endl;
-            std::cout<<"Tamano del camino minimo: "<< world.GetContador() << std::endl;  
+            std::cout<<"Tamano del camino minimo: "<< world.GetContadorCamino() << std::endl;
+            std::cout<<"Nodos analizados: "<< world.GetContadorNodos() << std::endl;  
+            getchar();  
 
             //algoritmo usando 8 direcciones
 
@@ -76,7 +81,9 @@ void EvaluacionExperimental(World& world) {
 
             world.PrintWorld();
             std::cout<<"Tiempo de ejecucion en microsegundos = "<< end_time_manhattan_8 << std::endl;  
-            std::cout<<"Tamano del camino minimo: "<< world.GetContador() << std::endl;  
+            std::cout<<"Tamano del camino minimo: "<< world.GetContadorCamino() << std::endl;
+            std::cout<<"Nodos analizados: "<< world.GetContadorNodos() << std::endl;  
+            getchar();
 
         f_heuristica* h5 = new d_euclidea;
             std::cout << "\nMundo resuelto con heuristica Euclidea y 8 direcciones: \n";
@@ -90,7 +97,9 @@ void EvaluacionExperimental(World& world) {
 
             world.PrintWorld();
             std::cout<<"Tiempo de ejecucion en microsegundos = "<< end_time_euclidea_8 << std::endl;
-            std::cout<<"Tamano del camino minimo: "<< world.GetContador() << std::endl;  
+            std::cout<<"Tamano del camino minimo: "<< world.GetContadorCamino() << std::endl;
+            std::cout<<"Nodos analizados: "<< world.GetContadorNodos() << std::endl;  
+            getchar();
         
         f_heuristica* h6 = new d_tchebysev;
             std::cout << "\nMundo resuelto con heuristica Tchebysev y 8 direcciones: \n";
@@ -104,7 +113,9 @@ void EvaluacionExperimental(World& world) {
 
             world.PrintWorld();
             std::cout<<"Tiempo de ejecucion en microsegundos = "<< end_time_tchebysev_8 << std::endl;
-            std::cout<<"Tamano del camino minimo: "<< world.GetContador() << std::endl;          
+            std::cout<<"Tamano del camino minimo: "<< world.GetContadorCamino() << std::endl;
+            std::cout<<"Nodos analizados: "<< world.GetContadorNodos() << std::endl;  
+            getchar();     
 }
 
 
@@ -240,11 +251,14 @@ int main( void ) {
 
         world.PrintWorld();
         std::cout<<"Tiempo de ejecucion en microsegundos = "<< end_time << std::endl;       
-        std::cout<<"Tamano del camino minimo: "<< world.GetContador() << std::endl;   
+        std::cout<<"Tamano del camino minimo: "<< world.GetContadorCamino() << std::endl;
+        std::cout<<"Nodos analizados: "<< world.GetContadorNodos() << std::endl;     
     }
 
     else if( menu == 1) {
+        obstacle_percentage = 0;
         do {
+        
         for(int i = 0; i < 200; i++) { //imprime guiones la mitad del tamaño de l mundo mayor menos el texto que va en medio
             std::cout << "-";
         }
@@ -261,6 +275,7 @@ int main( void ) {
         world.SetVehicle(vehicle_row, vehicle_col, destination_row, destination_col);
 
         EvaluacionExperimental(world);
+        getchar();
 
         World smaller_world(row/2, col/2);
         smaller_world.Obstacle(obstacle_percentage, obstacle_type);

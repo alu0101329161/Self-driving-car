@@ -196,7 +196,7 @@ World::PrintWorld(void) {
 // Permite guardar el camino para llegar al destino
 void 
 World::RebuildPath() {
-    SetContador(0);
+    SetContadorCamino(0);
     int i = world[end_.first][end_.second].GetDad().first;
     int j = world[end_.first][end_.second].GetDad().second;
     int aux_i, aux_j;
@@ -209,7 +209,7 @@ World::RebuildPath() {
         i = aux_i; j = aux_j;
         contador += 1;
     }
-    SetContador(contador + 1);
+    SetContadorCamino(contador + 1);
 }
 
 // Creación de hijos tanto en 4 como 8 direcciones
@@ -244,6 +244,8 @@ World::CreateSons(int x, int y, bool direction) {
 bool
 World::Astar(f_heuristica* heuristica, bool direction){
 
+    SetContadorNodos(0);
+    int contador = 0;
     std::list<std::pair<int, int>> open, close; // Lista donde almacenamos los hijos
     
     world[star_.first][star_.second].SetG(0);
@@ -265,12 +267,14 @@ World::Astar(f_heuristica* heuristica, bool direction){
 
         if((world[(*min).first][(*min).second].GetX() == end_.first) && (end_.second == world[(*min).first][(*min).second].GetY())) { //Hemos llegado al destino
             RebuildPath();
+            SetContadorNodos(contador);
             return true;
         }
 
         world[(*min).first][(*min).second].SetClose(true); // El elemento sera guardado en lista cerrada
         world[(*min).first][(*min).second].SetOpen(false);
         open.erase(min);
+        contador +=1;
         close.push_front(current);
 
         CreateSons(current.first, current.second, direction); // Creo a los hijos
@@ -310,5 +314,6 @@ World::Astar(f_heuristica* heuristica, bool direction){
             }
         }
     }
+    SetContadorNodos(contador);
     return false;
 }

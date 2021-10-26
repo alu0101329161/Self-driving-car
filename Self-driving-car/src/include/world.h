@@ -31,7 +31,8 @@ private:
     std::vector<std::vector<Cell>> world; // Vector donde se almacena el mundo
     std::pair<int, int> star_; // Posicion de inicio
     std::pair<int, int> end_; // Posicion de fin
-    int contador = 0;
+    int contador_camino = 0; 
+    int contador_nodos = 0;
 
 public:
 
@@ -56,12 +57,20 @@ public:
         return col;
     } 
 
-    int GetContador() {
-        return contador;
+    int GetContadorCamino() {
+        return contador_camino;
     }
 
-    void SetContador(int counter) {
-        contador = counter;
+    void SetContadorCamino(int counter) {
+        contador_camino = counter;
+    }
+
+    int GetContadorNodos() {
+        return contador_nodos;
+    }
+
+    void SetContadorNodos(int counter) {
+        contador_nodos = counter;
     }
 
 };
