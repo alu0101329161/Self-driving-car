@@ -27,10 +27,10 @@ void EvaluacionExperimental(World& world) {
             else std::cout << "!!Solucion No Encontrada!!" << std::endl;
 
             auto elapsed_manhattan_4 = Time::now()- start_time_manhattan_4;
-            long long end_time_manhattan_4 = std::chrono::duration_cast<std::chrono::microseconds>(elapsed_manhattan_4).count(); // acaba el chrono
+            auto end_time_manhattan_4 = std::chrono::duration_cast<std::chrono::duration<long double>>(elapsed_manhattan_4); // acaba el chrono
 
             world.PrintWorld();
-            std::cout<<"Tiempo de ejecucion en microsegundos = "<< end_time_manhattan_4 << std::endl;  
+            std::cout<<"Tiempo de ejecucion en segundos = "<< end_time_manhattan_4.count()  << std::endl;   
             std::cout<<"Tamano del camino minimo: "<< world.GetContadorCamino() << std::endl;
             std::cout<<"Nodos analizados: "<< world.GetContadorNodos() << std::endl;  
             getchar();
@@ -43,10 +43,10 @@ void EvaluacionExperimental(World& world) {
             else std::cout << "!!Solucion No Encontrada!!" << std::endl;
 
             auto elapsed_euclidea_4 = Time::now()- start_time_euclidea_4;
-            long long end_time_euclidea_4 = std::chrono::duration_cast<std::chrono::microseconds>(elapsed_euclidea_4).count(); // acaba el chrono
+            auto end_time_euclidea_4 = std::chrono::duration_cast<std::chrono::duration<long double>>(elapsed_euclidea_4); // acaba el chrono
 
             world.PrintWorld();
-            std::cout<<"Tiempo de ejecucion en microsegundos = "<< end_time_euclidea_4 << std::endl;
+            std::cout<<"Tiempo de ejecucion en segundos = "<< end_time_euclidea_4.count() << std::endl;
             std::cout<<"Tamano del camino minimo: "<< world.GetContadorCamino() << std::endl;
             std::cout<<"Nodos analizados: "<< world.GetContadorNodos() << std::endl;  
             getchar();
@@ -59,10 +59,10 @@ void EvaluacionExperimental(World& world) {
             else std::cout << "!!Solucion No Encontrada!!" << std::endl;
 
             auto elapsed_tchebysev_4 = Time::now()- start_time_tchebysev_4;
-            long long end_time_tchebysev_4 = std::chrono::duration_cast<std::chrono::microseconds>(elapsed_tchebysev_4).count(); // acaba el chrono
+            auto end_time_tchebysev_4 = std::chrono::duration_cast<std::chrono::duration<long double>>(elapsed_tchebysev_4); // acaba el chrono
 
             world.PrintWorld();
-            std::cout<<"Tiempo de ejecucion en microsegundos = "<< end_time_tchebysev_4 << std::endl;
+            std::cout<<"Tiempo de ejecucion en segundos = "<< end_time_tchebysev_4.count()  << std::endl;
             std::cout<<"Tamano del camino minimo: "<< world.GetContadorCamino() << std::endl;
             std::cout<<"Nodos analizados: "<< world.GetContadorNodos() << std::endl;  
             getchar();  
@@ -77,10 +77,10 @@ void EvaluacionExperimental(World& world) {
             else std::cout << "!!Solucion No Encontrada!!" << std::endl;
 
             auto elapsed_manhattan_8 = Time::now()- start_time_manhattan_8;
-            long long end_time_manhattan_8 = std::chrono::duration_cast<std::chrono::microseconds>(elapsed_manhattan_8).count(); // acaba el chrono
+            auto end_time_manhattan_8 = std::chrono::duration_cast<std::chrono::duration<long double>>(elapsed_manhattan_8); // acaba el chrono
 
             world.PrintWorld();
-            std::cout<<"Tiempo de ejecucion en microsegundos = "<< end_time_manhattan_8 << std::endl;  
+            std::cout<<"Tiempo de ejecucion en segundos = "<< end_time_manhattan_8.count()  << std::endl;  
             std::cout<<"Tamano del camino minimo: "<< world.GetContadorCamino() << std::endl;
             std::cout<<"Nodos analizados: "<< world.GetContadorNodos() << std::endl;  
             getchar();
@@ -93,10 +93,10 @@ void EvaluacionExperimental(World& world) {
             else std::cout << "!!Solucion No Encontrada!!" << std::endl;
 
             auto elapsed_euclidea_8 = Time::now()- start_time_euclidea_8;
-            long long end_time_euclidea_8 = std::chrono::duration_cast<std::chrono::microseconds>(elapsed_euclidea_8).count(); // acaba el chrono
+            auto end_time_euclidea_8 = std::chrono::duration_cast<std::chrono::duration<long double>>(elapsed_euclidea_8); // acaba el chrono
 
             world.PrintWorld();
-            std::cout<<"Tiempo de ejecucion en microsegundos = "<< end_time_euclidea_8 << std::endl;
+            std::cout<<"Tiempo de ejecucion en segundos = "<< end_time_euclidea_8.count() << std::endl;
             std::cout<<"Tamano del camino minimo: "<< world.GetContadorCamino() << std::endl;
             std::cout<<"Nodos analizados: "<< world.GetContadorNodos() << std::endl;  
             getchar();
@@ -109,10 +109,10 @@ void EvaluacionExperimental(World& world) {
             else std::cout << "!!Solucion No Encontrada!!" << std::endl;
 
             auto elapsed_tchebysev_8 = Time::now()- start_time_tchebysev_8;
-            long long end_time_tchebysev_8 = std::chrono::duration_cast<std::chrono::microseconds>(elapsed_tchebysev_8).count(); // acaba el chrono
+            auto end_time_tchebysev_8 = std::chrono::duration_cast<std::chrono::duration<long double>>(elapsed_tchebysev_8); // acaba el chrono
 
             world.PrintWorld();
-            std::cout<<"Tiempo de ejecucion en microsegundos = "<< end_time_tchebysev_8 << std::endl;
+            std::cout<<"Tiempo de ejecucion en segundos = "<< end_time_tchebysev_8.count()  << std::endl;
             std::cout<<"Tamano del camino minimo: "<< world.GetContadorCamino() << std::endl;
             std::cout<<"Nodos analizados: "<< world.GetContadorNodos() << std::endl;  
             getchar();     
@@ -247,10 +247,10 @@ int main( void ) {
         else std::cout << "!!Solucion No Encontrada!!" << std::endl;
         
         auto elapsed = Time::now() - start_time;
-        long long end_time = std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count(); // acaba el chrono
+        //auto end_time = std::chrono::duration_cast<std::chrono::duration<long double>>(elapsed); // acaba el chrono
 
         world.PrintWorld();
-        std::cout<<"Tiempo de ejecucion en microsegundos = "<< end_time << std::endl;       
+        std::cout<<"Tiempo de ejecucion en segundos = " << elapsed.count() << std::endl;       
         std::cout<<"Tamano del camino minimo: "<< world.GetContadorCamino() << std::endl;
         std::cout<<"Nodos analizados: "<< world.GetContadorNodos() << std::endl;     
     }
