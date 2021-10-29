@@ -172,7 +172,7 @@ World::PrintWorld(void) {
             switch(world[i][j].GetState()) {
 
                 case 0:
-                    std::cout<<termcolor::on_white<<"J"<<termcolor::reset;
+                    std::cout<<termcolor::on_white<<" "<<termcolor::reset;
                 break;
                 case 1:
                     std::cout<<termcolor::on_color<0, 0, 0><<" "<<termcolor::reset;
@@ -188,7 +188,7 @@ World::PrintWorld(void) {
                     std::cout<<termcolor::on_blue<<">"<<termcolor::reset;
                 break;
                 case 5:
-                    std::cout<<termcolor::on_bright_red<<" "<<termcolor::reset;
+                    std::cout<<termcolor::on_bright_magenta<<" "<<termcolor::reset;
                     world[i][j].SetState(0);
                 break;
             }

@@ -121,7 +121,7 @@ void EvaluacionExperimental(World& world) {
 
 int main( void ) {
     //int contador_4_manhattan, contador_4_euclidea, contador_8_manhattan, contador_8_euclidea;
-    int row = 100, col = 100, vehicle_row = 0, vehicle_col = 0, menu, vehicle_type;
+    int row = 250, col = 250, vehicle_row = 0, vehicle_col = 0, menu, vehicle_type;
     int destination_row = row - 1, destination_col = col - 1, obstacle_percentage = 25, obstacle_type = 0, heuristic_type = -1;
     bool direction = true; //false = 4 true = 8
     using Time = std::chrono::high_resolution_clock;
@@ -247,10 +247,10 @@ int main( void ) {
         else std::cout << "!!Solucion No Encontrada!!" << std::endl;
         
         auto elapsed = Time::now() - start_time;
-        //auto end_time = std::chrono::duration_cast<std::chrono::duration<long double>>(elapsed); // acaba el chrono
+        auto end_time = std::chrono::duration_cast<std::chrono::duration<long double>>(elapsed); // acaba el chrono
 
         world.PrintWorld();
-        std::cout<<"Tiempo de ejecucion en segundos = " << elapsed.count() << std::endl;       
+        std::cout<<"Tiempo de ejecucion en segundos = " << end_time.count() << std::endl;       
         std::cout<<"Tamano del camino minimo: "<< world.GetContadorCamino() << std::endl;
         std::cout<<"Nodos analizados: "<< world.GetContadorNodos() << std::endl;     
     }
