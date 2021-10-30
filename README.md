@@ -6,7 +6,7 @@ Integrantes:
 
 Para ejecutar el programa:
 - 1 Debe situarce dentro de SlefDrivingCar con un cd
-- 2 Ejecutar script en caso de no tener permisos usar chmod u+x nombre_arhcivo
+- 2 Ejecutar make y luego ./simulation
 
 Manejo del porgrama:
 Una vez dentro se podrá elegir la experiencia personalizada(1) o evaluación experimental(2)
