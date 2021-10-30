@@ -33,7 +33,7 @@ void EvaluacionExperimental(World& world) {
             std::cout<<"Tiempo de ejecucion en segundos = "<< end_time_manhattan_4.count()  << std::endl;   
             std::cout<<"Tamano del camino minimo: "<< world.GetContadorCamino() << std::endl;
             std::cout<<"Nodos analizados: "<< world.GetContadorNodos() << std::endl;  
-            getchar();
+            std::cout<<"Pulse cualquier tecla para continuar"<<std::endl; getchar();
 
         f_heuristica* h2 = new d_euclidea;
             std::cout << "\nMundo resuelto con heuristica Euclidea y 4 direcciones: \n";
@@ -49,7 +49,7 @@ void EvaluacionExperimental(World& world) {
             std::cout<<"Tiempo de ejecucion en segundos = "<< end_time_euclidea_4.count() << std::endl;
             std::cout<<"Tamano del camino minimo: "<< world.GetContadorCamino() << std::endl;
             std::cout<<"Nodos analizados: "<< world.GetContadorNodos() << std::endl;  
-            getchar();
+            std::cout<<"Pulse cualquier tecla para continuar"<<std::endl; getchar();
         
         f_heuristica* h3 = new d_tchebysev;
             std::cout << "\nMundo resuelto con heuristica Tchebysev y 4 direcciones: \n";
@@ -65,7 +65,7 @@ void EvaluacionExperimental(World& world) {
             std::cout<<"Tiempo de ejecucion en segundos = "<< end_time_tchebysev_4.count()  << std::endl;
             std::cout<<"Tamano del camino minimo: "<< world.GetContadorCamino() << std::endl;
             std::cout<<"Nodos analizados: "<< world.GetContadorNodos() << std::endl;  
-            getchar();  
+            std::cout<<"Pulse cualquier tecla para continuar"<<std::endl; getchar();  
 
             //algoritmo usando 8 direcciones
 
@@ -83,7 +83,7 @@ void EvaluacionExperimental(World& world) {
             std::cout<<"Tiempo de ejecucion en segundos = "<< end_time_manhattan_8.count()  << std::endl;  
             std::cout<<"Tamano del camino minimo: "<< world.GetContadorCamino() << std::endl;
             std::cout<<"Nodos analizados: "<< world.GetContadorNodos() << std::endl;  
-            getchar();
+            std::cout<<"Pulse cualquier tecla para continuar"<<std::endl; getchar();
 
         f_heuristica* h5 = new d_euclidea;
             std::cout << "\nMundo resuelto con heuristica Euclidea y 8 direcciones: \n";
@@ -99,7 +99,7 @@ void EvaluacionExperimental(World& world) {
             std::cout<<"Tiempo de ejecucion en segundos = "<< end_time_euclidea_8.count() << std::endl;
             std::cout<<"Tamano del camino minimo: "<< world.GetContadorCamino() << std::endl;
             std::cout<<"Nodos analizados: "<< world.GetContadorNodos() << std::endl;  
-            getchar();
+            std::cout<<"Pulse cualquier tecla para continuar"<<std::endl; getchar();
         
         f_heuristica* h6 = new d_tchebysev;
             std::cout << "\nMundo resuelto con heuristica Tchebysev y 8 direcciones: \n";
@@ -115,7 +115,7 @@ void EvaluacionExperimental(World& world) {
             std::cout<<"Tiempo de ejecucion en segundos = "<< end_time_tchebysev_8.count()  << std::endl;
             std::cout<<"Tamano del camino minimo: "<< world.GetContadorCamino() << std::endl;
             std::cout<<"Nodos analizados: "<< world.GetContadorNodos() << std::endl;  
-            getchar();     
+            std::cout<<"Pulse cualquier tecla para continuar"<<std::endl; getchar();
 }
 
 
@@ -274,7 +274,7 @@ int main( void ) {
         world.SetVehicle(vehicle_row, vehicle_col, destination_row, destination_col);
 
         EvaluacionExperimental(world);
-        getchar();
+        std::cout<<"Pulse cualquier tecla para continuar"<<std::endl; getchar();
 
         World smaller_world(row/2, col/2);
         smaller_world.Obstacle(obstacle_percentage, obstacle_type);
