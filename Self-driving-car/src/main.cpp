@@ -245,8 +245,7 @@ int main( void ) {
         auto start_time = Time::now(); //inicia el crono
         if(world.Astar(h , direction))std::cout<<"\n!!Solucion Encontrada!!\n"<<std::endl; //true hace 8 false 4 direcciones
         else std::cout << "!!Solucion No Encontrada!!" << std::endl;
-        
-        auto elapsed = Time::now() - start_time;
+        auto elapsed = Time::now()- start_time;
         auto end_time = std::chrono::duration_cast<std::chrono::duration<long double>>(elapsed); // acaba el chrono
 
         world.PrintWorld();
