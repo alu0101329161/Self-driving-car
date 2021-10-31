@@ -1,6 +1,7 @@
+# Path-Finder-C++
 
 Para ejecutar el programa:
-- 0 Debe descargar el zip o clonar el repositorio git@github.com:alu0101329161/IA-P1.git
+- 0 Debe descargar el zip o clonar el repositorio git@github.com:alu0101329161/IA-P1.git/Path-Finder-C++
 - 1 Debe situarce dentro de SelfDrivingCar con un cd
 - 2 Ejecutar make y luego ./simulation
 
